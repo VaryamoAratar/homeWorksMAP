@@ -62,15 +62,15 @@ float calcTime(int size, int number_of_threads) {
 
 void print_result(const std::vector<int>& sizes, int number_of_threads) {
 	switch (number_of_threads) {
-	case stream_number::ONE: std::cout << number_of_threads << " поток  \t";
+	case stream_number::ONE: std::cout << number_of_threads << " РїРѕС‚РѕРє  \t";
 		break;
-	case stream_number::TWO: std::cout << number_of_threads << " потока \t";
+	case stream_number::TWO: std::cout << number_of_threads << " РїРѕС‚РѕРєР° \t";
 		break;
-	case stream_number::THREE: std::cout << number_of_threads << " потока \t";
+	case stream_number::THREE: std::cout << number_of_threads << " РїРѕС‚РѕРєР° \t";
 		break;
-	case stream_number::FOUR: std::cout << number_of_threads << " потока \t";
+	case stream_number::FOUR: std::cout << number_of_threads << " РїРѕС‚РѕРєР° \t";
 		break;
-	default: std::cout << number_of_threads << " потоков\t";
+	default: std::cout << number_of_threads << " РїРѕС‚РѕРєРѕРІ\t";
 		break;
 	}
 
@@ -84,7 +84,7 @@ void print_header(int size) {
 	static bool flag{ false };
 	if (!flag) {
 		auto id2 = std::thread::hardware_concurrency();
-		std::cout << "Количество аппаратных ядер - " << '\t' << id2 << std::endl;
+		std::cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ Р°РїРїР°СЂР°С‚РЅС‹С… СЏРґРµСЂ - " << '\t' << id2 << std::endl;
 		flag = true;
 	}
 	std::cout << "\t\t" << size;
