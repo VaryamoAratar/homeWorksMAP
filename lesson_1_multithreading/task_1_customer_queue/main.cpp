@@ -8,7 +8,7 @@ void client(int& count)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		count++;
-		std::cout << "Ïîäîøåë íîâûé êëèåíò\nÎáùåå êîëè÷åñòâî êëèåíòîâ: " << count << std::endl;
+		std::cout << "ÐŸÐ¾Ð´Ð¾ÑˆÐµÐ» Ð½Ð¾Ð²Ñ‹Ð¹ ÐºÐ»Ð¸ÐµÐ½Ñ‚\nÐžÐ±Ñ‰ÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²: " << count << std::endl;
 	}
 };
 void the_operator(int& count)
@@ -18,7 +18,7 @@ void the_operator(int& count)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 		count--;
-		std::cout << "Îïåðàöèîíèñò îáñëóæèë êëèåíòà\nÎáùåå êîëè÷åñòâî êëèåíòîâ: " << count << std::endl;
+		std::cout << "ÐžÐ¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð¸ÑÑ‚ Ð¾Ð±ÑÐ»ÑƒÐ¶Ð¸Ð» ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð°\nÐžÐ±Ñ‰ÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²: " << count << std::endl;
 	}
 };
 
@@ -31,7 +31,7 @@ int main(int agrc, char* agrv[])
 	std::thread t1{ client, std::ref(count)};
 	std::thread t2{ the_operator, std::ref(count) };
 
-	std::cout << "Îêîøêî îòêðûëîñü\n";
+	std::cout << "ÐžÐºÐ¾ÑˆÐºÐ¾ Ð¾Ñ‚ÐºÑ€Ñ‹Ð»Ð¾ÑÑŒ\n";
 
 	t1.join();
 	t2.join();
