@@ -91,6 +91,7 @@ void print_header(int size) {
 }
 
 int main(int argc, char* agrv[]) {
+
 	setlocale(LC_ALL, "rus");
 
 	try {
