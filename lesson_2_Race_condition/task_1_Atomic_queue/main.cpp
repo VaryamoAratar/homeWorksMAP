@@ -11,7 +11,7 @@ void client(std::atomic<int> &atomic_count)
 		int count = atomic_count.load(std::memory_order::memory_order_relaxed);
 		count++;
 		atomic_count.store(count ,std::memory_order::memory_order_relaxed);
-		std::cout << "Ïîäîøåë íîâûé êëèåíò\nÎáùåå êîëè÷åñòâî êëèåíòîâ: " << atomic_count.load(std::memory_order::memory_order_relaxed) << std::endl;
+		std::cout << "ÐŸÐ¾Ð´Ð¾ÑˆÐµÐ» Ð½Ð¾Ð²Ñ‹Ð¹ ÐºÐ»Ð¸ÐµÐ½Ñ‚\nÐžÐ±Ñ‰ÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²: " << atomic_count.load(std::memory_order::memory_order_relaxed) << std::endl;
 	}
 };
 void the_operator(std::atomic<int>& atomic_count)
@@ -24,7 +24,7 @@ void the_operator(std::atomic<int>& atomic_count)
 		int count = atomic_count.load(std::memory_order::memory_order_relaxed);
 		count--;
 		atomic_count.store(count, std::memory_order::memory_order_relaxed);
-		std::cout << "Îïåðàöèîíèñò îáñëóæèë êëèåíòà\nÎáùåå êîëè÷åñòâî êëèåíòîâ: " << atomic_count.load(std::memory_order::memory_order_relaxed) << std::endl;
+		std::cout << "ÐžÐ¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð¸ÑÑ‚ Ð¾Ð±ÑÐ»ÑƒÐ¶Ð¸Ð» ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð°\nÐžÐ±Ñ‰ÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²: " << atomic_count.load(std::memory_order::memory_order_relaxed) << std::endl;
 	}
 };
 
@@ -37,8 +37,8 @@ int main(int agrc, char* agrv[])
 	std::thread t1{ client, std::ref(atomic_count) };
 	std::thread t2{ the_operator, std::ref(atomic_count) };
 
-	std::cout << "Îêîøêî îòêðûëîñü\nÏîäîøåë ïåðâûé êëèåíò\n";
-	std::cout << "Îáùåå êîëè÷åñòâî êëèåíòîâ: " << atomic_count.load(std::memory_order::memory_order_relaxed) << std::endl;
+	std::cout << "ÐžÐºÐ¾ÑˆÐºÐ¾ Ð¾Ñ‚ÐºÑ€Ñ‹Ð»Ð¾ÑÑŒ\nÐŸÐ¾Ð´Ð¾ÑˆÐµÐ» Ð¿ÐµÑ€Ð²Ñ‹Ð¹ ÐºÐ»Ð¸ÐµÐ½Ñ‚\n";
+	std::cout << "ÐžÐ±Ñ‰ÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð²: " << atomic_count.load(std::memory_order::memory_order_relaxed) << std::endl;
 
 	t1.join();
 	t2.join();
