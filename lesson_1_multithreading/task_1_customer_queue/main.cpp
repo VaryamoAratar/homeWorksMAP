@@ -13,7 +13,6 @@ void client(int& count)
 };
 void the_operator(int& count)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	for (count; count > 0;)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
@@ -25,14 +24,15 @@ void the_operator(int& count)
 
 int main(int agrc, char* agrv[])
 {
-	setlocale(LC_ALL, "rus");
+	//setlocale(LC_ALL, "rus");
 
-	int count{ 0};
+	int count{ 1 };
 	std::thread t1{ client, std::ref(count)};
 	std::thread t2{ the_operator, std::ref(count) };
 
-	std::cout << "Окошко открылось\n";
-
+	std::cout << "Окошко открылось\nПодошел первый клиент\n";
+	std::cout << "Общее количество клиентов: " << count << std::endl;
+	
 	t1.join();
 	t2.join();
 
