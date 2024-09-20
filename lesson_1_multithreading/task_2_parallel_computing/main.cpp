@@ -3,6 +3,7 @@
 #include <thread>
 #include <vector>
 #include <exception>
+#include <iomanip>
 
 enum stream_number {
 	ONE = 1,
@@ -62,20 +63,20 @@ float calcTime(int size, int number_of_threads) {
 
 void print_result(const std::vector<int>& sizes, int number_of_threads) {
 	switch (number_of_threads) {
-	case stream_number::ONE: std::cout << number_of_threads << " поток  \t";
+	case stream_number::ONE: std::cout << std::setw(2) << number_of_threads << std::setw(13) << "поток";
 		break;
-	case stream_number::TWO: std::cout << number_of_threads << " потока \t";
+	case stream_number::TWO: std::cout << std::setw(2) << number_of_threads << std::setw(14) << "потока";
 		break;
-	case stream_number::THREE: std::cout << number_of_threads << " потока \t";
+	case stream_number::THREE: std::cout << std::setw(2) << number_of_threads << std::setw(14) << "потока";
 		break;
-	case stream_number::FOUR: std::cout << number_of_threads << " потока \t";
+	case stream_number::FOUR: std::cout << std::setw(2) << number_of_threads << std::setw(14) << "потока";
 		break;
-	default: std::cout << number_of_threads << " потоков\t";
+	default: std::cout << std::setw(2) << number_of_threads << std::setw(15) << "потоков";
 		break;
 	}
 
 	for (const auto i : sizes) {
-		std::cout << calcTime(i, number_of_threads) << '\t';
+		std::cout << std::setw(16) << calcTime(i, number_of_threads);
 	}
 	std::cout << std::endl;
 }
@@ -85,14 +86,20 @@ void print_header(int size) {
 	if (!flag) {
 		auto id2 = std::thread::hardware_concurrency();
 		std::cout << "Количество аппаратных ядер - " << '\t' << id2 << std::endl;
+		std::cout << std::endl;
+		std::cout << std::setw(10) << ' ';
 		flag = true;
 	}
-	std::cout << "\t\t" << size;
+	
+	std::cout << std::setw(16) << size;
+
+
 }
 
 int main(int argc, char* agrv[]) {
 
-	setlocale(LC_ALL, "rus");
+	setlocale(LC_ALL, "ru_RU.utf8");
+
 
 	try {
 
