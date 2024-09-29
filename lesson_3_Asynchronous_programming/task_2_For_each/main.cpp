@@ -1,14 +1,10 @@
-#include <algorithm>
-#include <chrono>
 #include <exception>
 #include <future>
 #include <iostream>
-#include <numeric>
 #include <thread>
 #include <vector>
 #include <random>
 #include <iterator>
-#include <exception>
 
 //using namespace std;
 int rand_incr(int begin_of_range, int end_of_range)
