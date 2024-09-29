@@ -39,14 +39,14 @@ void my_for_each(InputIt first, InputIt last, UnaryFunc f)
     }
     catch (const std::exception& e)
     {
-        std::cerr << "Îøèáêà ïðè âûïîëíåíèè àñèíõðîííîé îïåðàöèè: " << e.what() << std::endl;
+        std::cerr << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð°ÑÐ¸Ð½Ñ…Ñ€Ð¾Ð½Ð½Ð¾Ð¹ Ð·Ð°Ð´Ð°Ñ‡Ð¸: " << e.what() << std::endl;
     }
 }
 
 
 int main() {
 
-    setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, "ru-RU.utf8");
 
     std::vector<int> vec;
     unsigned int number_of_elements = 1000;
