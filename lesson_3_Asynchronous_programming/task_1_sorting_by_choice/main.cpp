@@ -38,7 +38,7 @@ void Find_min(std::promise<std::list<int>::iterator> pos_promise, std::list<int>
 
 int main(int argc, char* argv[]) {
 
-    setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, "ru-RU.utf8");
 
     try {
         std::list<int> my_list;
@@ -46,14 +46,14 @@ int main(int argc, char* argv[]) {
         int begin_of_range = -50;
         int end_of_range = 50;
 
-        // Заполняем список случайными числами в диапазоне
+        // Р—Р°РїРѕР»РЅСЏРµРј СЃРїРёСЃРѕРє СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё РІ РґРёР°РїР°Р·РѕРЅРµ
         for (size_t i = 0; i < number_of_elements; i++)
         {
             my_list.push_back(rand_incr(begin_of_range, end_of_range));
         }
 
-        // Выводим список
-        std::cout << "Список до сортировки: ";
+        // Р’С‹РІРѕРґРёРј СЃРїРёСЃРѕРє
+        std::cout << "РЎРїРёСЃРѕРє РґРѕ СЃРѕСЂС‚РёСЂРѕРІРєРё: ";
         for (auto i : my_list) {
             std::cout << i << ' ';
         }
@@ -64,24 +64,24 @@ int main(int argc, char* argv[]) {
             std::promise<std::list<int>::iterator> pos_promise;
             std::future<std::list<int>::iterator> pos_future = pos_promise.get_future();
 
-            // Передаем начальный итератор списка и итератор, указывающий на послед. элемент
+            // РџРµСЂРµРґР°РµРј РЅР°С‡Р°Р»СЊРЅС‹Р№ РёС‚РµСЂР°С‚РѕСЂ СЃРїРёСЃРєР° Рё РёС‚РµСЂР°С‚РѕСЂ, СѓРєР°Р·С‹РІР°СЋС‰РёР№ РЅР° РїРѕСЃР»РµРґ. СЌР»РµРјРµРЅС‚
             std::async(Find_min, std::move(pos_promise), i, my_list.end());
 
-            // Обработка исключений при получении результата
+            // РћР±СЂР°Р±РѕС‚РєР° РёСЃРєР»СЋС‡РµРЅРёР№ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЂРµР·СѓР»СЊС‚Р°С‚Р°
             try {
                 auto pos_min = pos_future.get();
 
-                // Меняем местами только если это не тот же элемент
+                // РњРµРЅСЏРµРј РјРµСЃС‚Р°РјРё С‚РѕР»СЊРєРѕ РµСЃР»Рё СЌС‚Рѕ РЅРµ С‚РѕС‚ Р¶Рµ СЌР»РµРјРµРЅС‚
                 if (pos_min != i) {
                     std::swap(*i, *pos_min);
                 }
             }
             catch (const std::exception& e) {
-                std::cerr << "Ошибка при выполнении асинхронной операции: " << e.what() << std::endl;
+                std::cerr << "РћС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё Р°СЃРёРЅС…СЂРѕРЅРЅРѕР№ РѕРїРµСЂР°С†РёРё: " << e.what() << std::endl;
             }
         }
 
-        std::cout << "Список после сортировки: ";
+        std::cout << "РЎРїРёСЃРѕРє РїРѕСЃР»Рµ СЃРѕСЂС‚РёСЂРѕРІРєРё: ";
         for (auto i : my_list) {
             std::cout << i << ' ';
         }
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 
     }
     catch (const std::exception& e) {
-        std::cerr << "Ошибка: " << e.what() << std::endl;
+        std::cerr << "РћС€РёР±РєР°: " << e.what() << std::endl;
     }
 
     return 0;
