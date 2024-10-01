@@ -134,6 +134,9 @@
     <ClInclude Include="Line.h" />
     <ClInclude Include="Shape.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Вопрос.md" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
