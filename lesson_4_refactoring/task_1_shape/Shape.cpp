@@ -1,116 +1,80 @@
-#define _USE_MATH_DEFINES
-#include"Shape.h"
-#include<cmath>
-Shape::Shape(int _type, int _x1, int _y1, int _z1, int _x2, int _y2, int _z2, int _x3, int _y3, int _z3, int _x4, int _y4, int _z4, int _x5, int _y5, int _z5, int _x6, int _y6, int _z6, int _x7, int _y7, int _z7, int _x8, int _y8, int _z8)
+struct Point
 {
-	type = _type;
-	// заполн¤ем координаты фигуры
-	switch (type)
-	{
-	case line:
-		x1 = _x1; y1 = _y1;
-		x2 = _x2; y2 = _y2;
-		break;
-	case sqr:
-		x1 = _x1; y1 = _y1;
-		x2 = _x2; y2 = _y2;
-		x3 = _x3; y3 = _y3;
-		x4 = _x4; y4 = _y4;
-		break;
-	case cube:
-		x1 = _x1; y1 = _y1; z1 = _z1;
-		x2 = _x2; y2 = _y2; z2 = _z2;
-		x3 = _x3; y3 = _y3; z3 = _z3;
-		x4 = _x4; y4 = _y4; z4 = _z4;
-		x5 = _x5; y5 = _y5; z5 = _z5;
-		x6 = _x6; y6 = _y6; z6 = _z6;
-		x7 = _x7; y7 = _y7; z7 = _z7;
-		x8 = _x8; y8 = _y8; z8 = _z8;
-		break;
-	default:
-		break;
-	}
+    int x;
+    int y;
+    int z;
 
-	// стороны фигуры
-	int a = abs(x1 - x2);
-	int b = abs(y1 - y2);
-	int c = abs(z1 - z2);
-	// считаем площадь фигуры
-	switch (type)
-	{
-	case line:
-		square = 0;
-		break;
-	case sqr:
-		square = a * b;
-		break;
-	case cube:
-		square = 2 * a * b + 2 * a * c + 2 * b * c;
-		break;
-	default:
-		break;
-	}
+    Point(int _x = 0, int _y = 0, int _z = 0) : x(_x), y(_y), z(_z) {}
+};
 
-	// считаем объем фигуры
-	switch (type)
-	{
-	case line:
-		volume = 0;
-		break;
-	case sqr:
-		volume = 0;
-		break;
-	case cube:
-		volume = a * b * c;
-		break;
-	default:
-		break;
-	}
-
-}
-
-Shape::Shape(int type, int _x1, int _y1, double R, double H)
+class Shape
 {
-	// заполн¤ем координаты фигуры
-	switch (type)
-	{
-	case circle:
-		x1 = _x1; y1 = _y1;
-		radius = R;
-		break;
-	case cylinder:
-		x1 = _x1; y1 = _y1;
-		radius = R;
-		height = H;
-		break;
-	default:
-		break;
-	}
+public:
+    virtual ~Shape() = default;
 
-	// считаем площадь фигуры
-	switch (type)
-	{
-	case circle:
-		square = M_PI * R * R;
-		break;
-	case cylinder:
-		square = M_PI * R * R + 2 * R * height;
-		break;
-	default:
-		break;
-	}
+    virtual void shift(double _x = 0, double _y = 0, double _z = 0) = 0;
+    virtual void scaleX(double factor) = 0;
+    virtual void scaleY(double factor) = 0;
+    virtual void scaleZ(double factor) = 0;
+    virtual void scale(double factor) = 0;
+};
 
-	// считаем объем фигуры
-	switch (type)
-	{
-	case circle:
-		volume = 0;
-		break;
-	case cylinder:
-		volume = M_PI * R * R * height;
-		break;
-	default:
-		break;
-	}
+class Line : public Shape
+{
+public:
+    Line(Point _first_point, Point _second_point) : first_point(_first_point), second_point(_second_point) {}
 
+    void shift(double _x = 0, double _y = 0, double _z = 0) override
+    {
+        first_point.x += _x;
+        first_point.y += _y;
+        first_point.z += _z;
+
+        second_point.x += _x;
+        second_point.y += _y;
+        second_point.z += _z;
+    }
+
+    void scaleX(double factor) override
+    {
+        first_point.x *= factor;
+        second_point.x *= factor;
+    }
+
+    void scaleY(double factor) override
+    {
+        first_point.y *= factor;
+        second_point.y *= factor;
+    }
+
+    void scaleZ(double factor) override
+    {
+        first_point.z *= factor;
+        second_point.z *= factor;
+    }
+
+    void scale(double factor) override
+    {
+        first_point.x *= factor;
+        first_point.y *= factor;
+        first_point.z *= factor;
+
+        second_point.x *= factor;
+        second_point.y *= factor;
+        second_point.z *= factor;
+    }
+
+private:
+    Point first_point, second_point;
+};
+
+
+int main()
+{
+    Point line_first_point {1, 2, 3};
+    Point line_second_point {4, 5, 6};
+
+    Line lines(line_first_point, line_second_point);
+
+    return 0;
 }
