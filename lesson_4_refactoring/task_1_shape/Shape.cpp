@@ -11,7 +11,7 @@ struct Point
     Point(double _x = 0.0, double _y = 0.0) : x(_x), y(_y) {}
 };
 
-class IShape //только для фигур в плоскости XY
+class IShape //С‚РѕР»СЊРєРѕ РґР»СЏ С„РёРіСѓСЂ РІ РїР»РѕСЃРєРѕСЃС‚Рё XY
 {
 public:
     virtual ~IShape() = default;
@@ -167,7 +167,7 @@ protected:
         double AB = sqrt(pow(B.x - A.x, 2) + pow(B.y - A.y, 2));
 
         if (AB == 0) {
-            std::cout << "Ошибка: точки A и B совпадают!" << std::endl;
+            std::cout << "РћС€РёР±РєР°: С‚РѕС‡РєРё A Рё B СЃРѕРІРїР°РґР°СЋС‚!" << std::endl;
             return { 0, 0 };
         }
 
@@ -179,12 +179,12 @@ protected:
 
         Point C1;
         if (legLength > 0) {
-            C1.x = A.x + legLength * perpX; // Перпендикулярно вверх
-            C1.y = A.y + legLength * perpY; // Перпендикулярно вверх
+            C1.x = A.x + legLength * perpX; // РџРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅРѕ РІРІРµСЂС…
+            C1.y = A.y + legLength * perpY; // РџРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅРѕ РІРІРµСЂС…
         }
         else {
-            C1.x = A.x - legLength * perpX; // Перпендикулярно вниз
-            C1.y = A.y - legLength * perpY; // Перпендикулярно вниз
+            C1.x = A.x - legLength * perpX; // РџРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅРѕ РІРЅРёР·
+            C1.y = A.y - legLength * perpY; // РџРµСЂРїРµРЅРґРёРєСѓР»СЏСЂРЅРѕ РІРЅРёР·
         }
         return C1;
     }
