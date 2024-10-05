@@ -1,14 +1,14 @@
-#ifndef LINE_H
-#define LINE_H
+#ifndef CIRCLE_H
+#define CIRCLE_H
 
 #include "IShape.h"
 #include <stdexcept>
 #include "Point.h"
 
-class Line : public IShape {
+class Circle : public IShape {
 public:
-    Line(Point _first_point, Point _second_point);
-    
+    Circle(Point _center, double _radius);
+
     void shift(double, double, double) override;
 
     void scaleX(double) override;
@@ -20,8 +20,8 @@ public:
     void scale(double) override;
 
 protected:
-    Point first_point, second_point;
+    Point center;
+    double radius{ 0 };
 };
 
-#endif //LINE_H
-
+#endif //CIRCLE_H
