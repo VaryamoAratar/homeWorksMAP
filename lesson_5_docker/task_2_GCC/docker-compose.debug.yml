@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  task2gcc:
+    image: task2gcc
+    build:
+      context: .
+      dockerfile: ./Dockerfile

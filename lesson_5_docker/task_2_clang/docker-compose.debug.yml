@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  task2clang:
+    image: task2clang
+    build:
+      context: .
+      dockerfile: ./Dockerfile
