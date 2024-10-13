@@ -37,7 +37,7 @@ public:
 
 private:
     std::queue<T> queue_;  
-    mutable std::mutex mutex_;  
+    mutable std::mutex mutex_;
     std::condition_variable cond_var_;  
 };
 
@@ -50,16 +50,7 @@ public:
     }
 
     ~thread_pool() {
-        {
-            std::lock_guard<std::mutex> lock(mutex_);
-            stopping_ = true; 
-        }
-        cond_var_.notify_all(); 
-        for (std::thread& thread : threads_) {
-            if (thread.joinable()) {
-                thread.join(); 
-            }
-        }
+        stop();
     }
 
     template<typename F>
@@ -68,26 +59,35 @@ public:
     }
 
 private:
+    void stop() {
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            stopping_ = true;
+        }
+        queue_.push([] {});
+        for (auto& thread : threads_) {
+            thread.join();
+        }
+    }
     void work() {
         while (true) {
             std::function<void()> task;
-            {
-                std::unique_lock<std::mutex> lock(mutex_);
-                cond_var_.wait(lock, [this] { return stopping_ || !queue_.empty(); });
-                if (stopping_ && queue_.empty()) {
-                    return; 
-                }
-                task = queue_.pop(); 
+            if (stopping_ && queue_.empty()) {
+                return;
             }
-            task(); 
+            if (!queue_.empty()) {
+                task = queue_.pop();
+            }
+             if (task) {
+                task();
+            }
         }
     }
 
     std::vector<std::thread> threads_; 
     safe_queue<std::function<void()>> queue_; 
-    std::mutex mutex_; 
-    std::condition_variable cond_var_; 
     bool stopping_ = false; 
+    std::mutex mutex_;
 };
 std::mutex m;
 
@@ -112,7 +112,6 @@ int main() {
             std::this_thread::sleep_for(1s);
             pool.submit(example_task_one);
             pool.submit(example_task_two);
-
         }
 
     }
